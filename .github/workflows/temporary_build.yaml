@@ -19,6 +19,6 @@ jobs:
       - uses: bacongobbler/azure-blob-storage-upload@v1.2.0
         with:
           source_dir: build
-          container_name: $www
+          container_name: $web
           connection_string: ${{ secrets.STORAGE_CONNECTION_STRING }}
           sync: false
