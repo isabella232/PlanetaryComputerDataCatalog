@@ -72,8 +72,6 @@ export const mapSlice = createSlice({
       state.useHighDef = action.payload;
     },
     setCompareMode: state => {
-      console.log('set it')
-      console.log(state)
       state.compareMode = !state.compareMode
     }
   },
@@ -93,7 +91,6 @@ export const mapSlice = createSlice({
   },
 });
 
-console.log(mapSlice.actions)
 export const {
   setCamera,
   setCenter,

@@ -1,5 +1,5 @@
-import { ActionButton } from "@fluentui/react";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { hashQueryKeyByOptions } from "react-query/types/core/utils";
 
 import { IStacCollection } from "types/stac";
 import { createMosaicQueryHashkey } from "utils/requests";
@@ -11,6 +11,7 @@ import { AppThunk, ExploreState } from "./store";
 export interface MosaicState {
   collection: IStacCollection | null;
   query: IMosaic;
+  queryToCompare: IMosaic;
   renderOption: IMosaicRenderOption | null;
   mosaicOption: Array<any>;
   layer: {
@@ -36,6 +37,7 @@ const initialMosaicState = {
 const initialState: MosaicState = {
   collection: null,
   query: initialMosaicState,
+  queryToCompare: initialMosaicState,
   renderOption: null,
   mosaicOption: [],
   layer: {
@@ -60,6 +62,17 @@ export const setMosaicQuery = createAsyncThunk<string, IMosaic>(
   }
 );
 
+export const setMosaicToCompareQuery = createAsyncThunk<string, IMosaic>(
+  "cql-api/createQueryToCompareHashkey",
+  async (queryInfo: IMosaic, { getState, dispatch }) => {
+    dispatch(setQueryToCompare(queryInfo));
+    const state = getState() as ExploreState;
+    const collectionId = state.mosaic.collection?.id;
+    const hashkey = await createMosaicQueryHashkey(queryInfo, collectionId);
+    return hashkey;
+  }
+);
+
 export const resetMosaicState = (): AppThunk => dispatch => {
   resetMosaicQueryStringState();
   dispatch(resetMosiac());
@@ -76,6 +89,9 @@ export const mosaicSlice = createSlice({
     },
     setQuery: (state, action: PayloadAction<IMosaic>) => {
       state.query = { ...action.payload, hash: null };
+    },
+    setQueryToCompare: (state, action: PayloadAction<IMosaic>) => {
+      state.queryToCompare = { ...action.payload, hash: null };
     },
     setMosaicOption: (state, action: PayloadAction<any>) => {
       state.mosaicOption = action.payload
@@ -105,6 +121,11 @@ export const mosaicSlice = createSlice({
       (state, action: PayloadAction<string>) => {
         state.query.hash = action.payload;
       }
+    ).addCase(
+      setMosaicToCompareQuery.fulfilled,
+      (state, action: PayloadAction<string>) => {
+        state.queryToCompare.hash = action.payload;
+      }
     );
   },
 });
@@ -113,6 +134,7 @@ export const {
   resetMosiac,
   setCollection,
   setQuery,
+  setQueryToCompare,
   setMosaicOption,
   setRenderOption,
   setShowEdit,

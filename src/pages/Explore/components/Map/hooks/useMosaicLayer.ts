@@ -43,8 +43,6 @@ const useMosaicLayer = (
         (mosaicLayer as atlas.layer.TileLayer).setOptions(tileLayerOpts);
       } else {
         const layer = new atlas.layer.TileLayer(tileLayerOpts, mosaicLayerName);
-        console.log('hi')
-        console.log(layer)
         map.layers.add(layer, itemOutlineLayerName);
       }
     } else {

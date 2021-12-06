@@ -64,8 +64,6 @@ const StateSelector = ({
   ): void => {
     if (option) {
       const payload = getStateValFn ? getStateValFn(option.key) : option.key;
-      console.log('let\'t see payload')
-      console.log(payload)
       dispatch(action(payload));
     }
   };

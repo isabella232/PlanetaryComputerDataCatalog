@@ -11,6 +11,8 @@ const DARK_MAP_STYLE = 'grayscale_dark'
 const map1Id = 'map-to-compare-1'
 const map2Id = 'map-to-compare-2'
 export const mosaicLayerName = "stac-mosaic-1";
+export const mosaicLayerName2 = "stac-mosaic-2";
+
 const CompareMap = () => {
 
   const map1Ref = useRef(null)
@@ -18,10 +20,43 @@ const CompareMap = () => {
   const [mapReady, setMapReady] = useState(false)
   const { center, zoom, compareMode} = useExploreSelector(s => s.map);
   const { mosaic, detail, map } = useExploreSelector(s => s);
-  const { collection, query, renderOption } = mosaic;
+  const { collection, query, queryToCompare, renderOption } = mosaic;
   const stacItemForMosaic = detail.showAsLayer ? detail.selectedItem : null;
   const { useHighDef } = map;
 
+  useEffect(() => {
+    if (!queryToCompare.hash || !mapReady) return
+    const map = map2Ref.current;
+    const mosaicLayer = map.layers.getLayerById(mosaicLayerName2);
+    const isItemLayerValid = stacItemForMosaic && collection;
+    const isMosaicLayerValid = query.hash;
+
+
+    if ((isMosaicLayerValid || isItemLayerValid) && renderOption) {
+      const tileLayerOpts  = {
+        tileUrl: makeTileJsonUrl(
+          queryToCompare,
+          renderOption,
+          collection,
+          stacItemForMosaic,
+          useHighDef
+        ),
+        visible: true,
+      };
+      if (mosaicLayer) {
+        (mosaicLayer).setOptions(tileLayerOpts);
+      } else {
+        const layer = new atlas.layer.TileLayer(tileLayerOpts, mosaicLayerName);
+        map.layers.add(layer, itemOutlineLayerName);
+      }
+    } else {
+      if (mosaicLayer) {
+        // Remove visibility of the mosaic layer, rather than remove it from the map. As a result,
+        // the opacity settings will be retained
+        (mosaicLayer).setOptions({ visible: false });
+      }
+    }
+  },[queryToCompare.hash, mapReady])
 
   useEffect(()=> {
     if(!mapReady) return
@@ -30,7 +65,6 @@ const CompareMap = () => {
     const isItemLayerValid = stacItemForMosaic && collection;
     const isMosaicLayerValid = query.hash;
 
-    // 
     if ((isMosaicLayerValid || isItemLayerValid) && renderOption) {
       const tileLayerOpts  = {
         tileUrl: makeTileJsonUrl(
@@ -47,8 +81,6 @@ const CompareMap = () => {
         (mosaicLayer).setOptions(tileLayerOpts);
       } else {
         const layer = new atlas.layer.TileLayer(tileLayerOpts, mosaicLayerName);
-        console.log('hi')
-        console.log(layer)
         map.layers.add(layer, itemOutlineLayerName);
       }
     } else {
