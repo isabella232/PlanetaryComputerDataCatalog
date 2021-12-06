@@ -18,8 +18,8 @@ const stackTokens: IStackTokens = {
 
 // TODO: track heights rather than hard code them
 const heights = {
-  header: 57.5,
-  footer: 27,
+  header: 0,
+  footer: 0,
   buffer: 2,
 };
 
