@@ -1,3 +1,4 @@
+import { ActionButton } from "@fluentui/react";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 import { IStacCollection } from "types/stac";
@@ -11,6 +12,7 @@ export interface MosaicState {
   collection: IStacCollection | null;
   query: IMosaic;
   renderOption: IMosaicRenderOption | null;
+  mosaicOption: Array<any>;
   layer: {
     minZoom: number;
     maxExtent: number[];
@@ -25,6 +27,7 @@ const initialMosaicState = {
   name: null,
   description: null,
   cql: null,
+  mosaicOption: null,
   sortby: null,
   hash: null,
   renderOptions: null,
@@ -34,6 +37,7 @@ const initialState: MosaicState = {
   collection: null,
   query: initialMosaicState,
   renderOption: null,
+  mosaicOption: [],
   layer: {
     minZoom: DEFAULT_MIN_ZOOM,
     maxExtent: [],
@@ -73,6 +77,9 @@ export const mosaicSlice = createSlice({
     setQuery: (state, action: PayloadAction<IMosaic>) => {
       state.query = { ...action.payload, hash: null };
     },
+    setMosaicOption: (state, action: PayloadAction<any>) => {
+      state.mosaicOption = action.payload
+    }, 
     setRenderOption: (state, action: PayloadAction<IMosaicRenderOption>) => {
       state.renderOption = action.payload;
       if (!action.payload.minZoom) {
@@ -106,6 +113,7 @@ export const {
   resetMosiac,
   setCollection,
   setQuery,
+  setMosaicOption,
   setRenderOption,
   setShowEdit,
   setShowResults,

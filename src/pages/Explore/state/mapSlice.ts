@@ -16,6 +16,7 @@ export interface MapState {
   useHighDef: boolean;
   previousCenter: [number, number] | null;
   previousZoom: number | null;
+  compareMode: boolean;
 }
 
 const initialState: MapState = {
@@ -28,6 +29,7 @@ const initialState: MapState = {
   useHighDef: true,
   previousCenter: null,
   previousZoom: null,
+  compareMode: false
 };
 
 export const mapSlice = createSlice({
@@ -69,6 +71,11 @@ export const mapSlice = createSlice({
     setUseHighDef: (state, action: PayloadAction<boolean>) => {
       state.useHighDef = action.payload;
     },
+    setCompareMode: state => {
+      console.log('set it')
+      console.log(state)
+      state.compareMode = !state.compareMode
+    }
   },
   extraReducers: builder => {
     builder.addCase(setShowAsLayer, (state, action: PayloadAction<boolean>) => {
@@ -86,6 +93,7 @@ export const mapSlice = createSlice({
   },
 });
 
+console.log(mapSlice.actions)
 export const {
   setCamera,
   setCenter,
@@ -95,6 +103,7 @@ export const {
   setUseHighDef,
   clearBoundaryShape,
   toggleShowSidebar,
+  setCompareMode
 } = mapSlice.actions;
 
 export default mapSlice.reducer;

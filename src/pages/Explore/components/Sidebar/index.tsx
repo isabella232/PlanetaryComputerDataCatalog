@@ -26,6 +26,8 @@ import { useStacFilter } from "../../utils/hooks";
 import { SIDEBAR_WIDTH } from "../../utils/constants";
 import ErrorFallback from "components/ErrorFallback";
 
+import CompareButton from './CompareButton'
+
 const stackTokens: IStackTokens = {
   childrenGap: 5,
 };

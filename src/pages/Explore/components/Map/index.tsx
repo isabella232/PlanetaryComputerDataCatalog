@@ -26,12 +26,13 @@ import {
 import MapSettingsControl from "./components/MapSettingsControl";
 import { DEFAULT_MAP_STYLE } from "pages/Explore/utils/constants";
 import LegendControl from "./components/LegendControl";
+import CompareMap from './components/CompareMap'
 
 const mapContainerId: string = "viewer-map";
 
 const ExploreMap = () => {
   const mapRef = useRef<atlas.Map | null>(null);
-  const { center, zoom } = useExploreSelector(s => s.map);
+  const { center, zoom, compareMode} = useExploreSelector(s => s.map);
   const [mapReady, setMapReady] = useState<boolean>(false);
   const mapHandlers = useMapEvents(mapRef);
 
@@ -91,10 +92,11 @@ const ExploreMap = () => {
       {mapHandlers.areTilesLoading && loadingIndicator}
       {showZoomMsg && zoomMsg}
       {showExtentMsg && extentMsg}
+      {compareMode && <CompareMap />}
       <PlaceSearchControl mapRef={mapRef} />
       <MapSettingsControl mapRef={mapRef} />
       <LegendControl />
-      <div id={mapContainerId} style={{ width: "100%", height: "100%" }} />
+      <div id={mapContainerId} style={{ width: "100%", height: "100%", visibility: (compareMode)? 'hidden': 'visible' }} />
     </div>
   );
 };
