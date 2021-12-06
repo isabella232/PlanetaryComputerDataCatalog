@@ -16,3 +16,9 @@ jobs:
       - uses: borales/actions-yarn@v2.3.0
         with:
           cmd: build
+      - uses: bacongobbler/azure-blob-storage-upload@v1.2.0
+        with:
+          source_dir: dist
+          container_name: $www
+          connection_string: ${{ secrets.STORAGE_CONNECTION_STRING }}
+          sync: false
