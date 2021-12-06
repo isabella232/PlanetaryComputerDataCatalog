@@ -18,7 +18,7 @@ jobs:
           cmd: build
       - uses: bacongobbler/azure-blob-storage-upload@v1.2.0
         with:
-          source_dir: dist
+          source_dir: build
           container_name: $www
           connection_string: ${{ secrets.STORAGE_CONNECTION_STRING }}
           sync: false
