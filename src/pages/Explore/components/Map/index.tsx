@@ -92,11 +92,11 @@ const ExploreMap = () => {
       {mapHandlers.areTilesLoading && loadingIndicator}
       {showZoomMsg && zoomMsg}
       {showExtentMsg && extentMsg}
-      {compareMode && <CompareMap />}
       <PlaceSearchControl mapRef={mapRef} />
       <MapSettingsControl mapRef={mapRef} />
       <LegendControl />
       <div id={mapContainerId} style={{ width: "100%", height: "100%", visibility: (compareMode)? 'hidden': 'visible' }} />
+      <CompareMap />
     </div>
   );
 };

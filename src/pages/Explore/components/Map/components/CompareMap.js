@@ -2,9 +2,13 @@ import React, {useEffect, useRef, useState} from 'react'
 import { DEFAULT_MAP_STYLE } from "pages/Explore/utils/constants";
 import * as atlas from "azure-maps-control";
 import { makeTileJsonUrl } from "utils";
-import { useExploreSelector } from "../../../state/hooks";
-import SwipeMap from './Slider.ts'
 import { itemOutlineLayerName } from "pages/Explore/utils/layers";
+import { useExploreSelector } from "../../../state/hooks";
+import {
+  useMapEvents
+} from "../hooks";
+import SwipeMap from './Slider.ts'
+
 
 const DARK_MAP_STYLE = 'grayscale_dark'
 
@@ -14,7 +18,6 @@ export const mosaicLayerName = "stac-mosaic-1";
 export const mosaicLayerName2 = "stac-mosaic-2";
 
 const CompareMap = () => {
-
   const map1Ref = useRef(null)
   const map2Ref = useRef(null)
   const [mapReady, setMapReady] = useState(false)
@@ -23,14 +26,16 @@ const CompareMap = () => {
   const { collection, query, queryToCompare, renderOption } = mosaic;
   const stacItemForMosaic = detail.showAsLayer ? detail.selectedItem : null;
   const { useHighDef } = map;
+  const mapHandlers = useMapEvents(map1Ref);
+
 
   useEffect(() => {
+    // add layer to map 2
     if (!queryToCompare.hash || !mapReady) return
     const map = map2Ref.current;
     const mosaicLayer = map.layers.getLayerById(mosaicLayerName2);
     const isItemLayerValid = stacItemForMosaic && collection;
     const isMosaicLayerValid = query.hash;
-
 
     if ((isMosaicLayerValid || isItemLayerValid) && renderOption) {
       const tileLayerOpts  = {
@@ -56,10 +61,11 @@ const CompareMap = () => {
         (mosaicLayer).setOptions({ visible: false });
       }
     }
-  },[queryToCompare.hash, mapReady])
+  },[queryToCompare, mapReady, collection, query, renderOption, stacItemForMosaic,useHighDef])
 
   useEffect(()=> {
-    if(!mapReady) return
+    // add layer to map 1
+    if (!mapReady) return
     const map = map1Ref.current;
     const mosaicLayer = map.layers.getLayerById("stac-mosaic");
     const isItemLayerValid = stacItemForMosaic && collection;
@@ -90,9 +96,11 @@ const CompareMap = () => {
         (mosaicLayer).setOptions({ visible: false });
       }
     }
-  }, [mapReady])
+  }, [mapReady, collection, query, renderOption, stacItemForMosaic,useHighDef])
 
   useEffect(() => {
+    // set up / or adjust if the map was already initialized
+    if(!compareMode) return;
     if(!map1Ref.current) {
       const map1 = new atlas.Map(map1Id, {
         view: "Auto",
@@ -125,21 +133,24 @@ const CompareMap = () => {
       });
 
       map1.events.add("ready", () => {setMapReady(true)});
-      // map1Ref.events.add("moveend", mapHandlers.onMapMove);
+      map1.events.add("moveend", mapHandlers.onMapMove);
       // map1Ref.events.add("styledata", mapHandlers.onStyleDataLoaded);
       // map1Ref.events.add("data", mapHandlers.onDataEvent);
 
       map1Ref.current = map1;
       map2Ref.current = map2;
       new SwipeMap(map1, map2);
-
+    } else {
+      map1Ref.current.setCamera({
+        center: center,
+        zoom: zoom
+      })
     }
-    
-  },[])
-  return <div  style={{ width: "100%", height: "100%"}} >
+
+  }, [compareMode, center, zoom, mapHandlers.onMapMove])
+  return <div  style={{ position: 'absolute', left: 0, top: 0, width: "100%", height: "100%", visibility: compareMode? 'visible': 'hidden'}} >
     <div id={map1Id} style={{ width: "100%", height: "100%"}} />
     <div id={map2Id} style={{ width: "100%", height: "100%", position: 'absolute', top: 0 }} />
-
   </div>
 }
 

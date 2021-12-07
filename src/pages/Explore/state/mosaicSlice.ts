@@ -1,6 +1,4 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { hashQueryKeyByOptions } from "react-query/types/core/utils";
-
 import { IStacCollection } from "types/stac";
 import { createMosaicQueryHashkey } from "utils/requests";
 import { IMosaic, IMosaicRenderOption } from "../types";
@@ -111,6 +109,9 @@ export const mosaicSlice = createSlice({
     setLayerMinZoom: (state, action: PayloadAction<number>) => {
       state.layer.minZoom = action.payload;
     },
+    resetQueryToCompare: (state) => {
+      state.queryToCompare = initialMosaicState
+    },
     resetMosiac: () => {
       return initialState;
     },
@@ -140,6 +141,7 @@ export const {
   setShowEdit,
   setShowResults,
   setLayerMinZoom,
+  resetQueryToCompare
 } = mosaicSlice.actions;
 
 export default mosaicSlice.reducer;

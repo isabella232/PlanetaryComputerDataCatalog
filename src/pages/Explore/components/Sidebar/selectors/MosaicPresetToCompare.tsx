@@ -1,25 +1,12 @@
 import { IDropdownOption } from "@fluentui/react";
-import { useEffect } from "react";
-import { useCollectionMosaicInfo } from "../../../utils/hooks";
-import { useExploreDispatch, useExploreSelector } from "../../../state/hooks";
-import { setMosaicToCompareQuery, setMosaicOption } from "../../../state/mosaicSlice";
+
+import { useExploreSelector } from "../../../state/hooks";
+import { setMosaicToCompareQuery } from "../../../state/mosaicSlice";
 import StateSelector from "./StateSelector";
-import { useMosaicUrlState } from "./hooks/useUrlState";
 
 const MosaicPresetToCompareSelector = () => {
-  const { collection, query, queryToCompare, mosaicOption } = useExploreSelector(state => state.mosaic);
-  const dispatch = useExploreDispatch();
-
+  const { collection, queryToCompare, mosaicOption } = useExploreSelector(state => state.mosaic);
   const mosaics = mosaicOption
-  
-  useEffect(() => {
-    if (query.name === null) {
-      // dispatch<any>(setMosaicQuery(mosaicInfo.mosaics[0]));
-      // dispatch<any>(setMosaicOption(mosaicInfo.mosaics));
-    }
-  }, [dispatch, query.name]);
-
-  // useMosaicUrlState(mosaics);
 
   const mosaicOptions =
     mosaics.length
