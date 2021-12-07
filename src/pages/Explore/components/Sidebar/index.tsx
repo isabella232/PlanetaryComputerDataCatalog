@@ -3,10 +3,7 @@ import {
   IStackStyles,
   IStackTokens,
   Stack,
-  StackItem,
-  Text,
-  FontSizes,
-  FontWeights,
+  StackItem
 } from "@fluentui/react";
 import { ErrorBoundary } from "react-error-boundary";
 
@@ -81,18 +78,7 @@ const Sidebar = () => {
     <>
       <StackItem disableShrink styles={sidebarStyles}>
         <Stack styles={searchPanelStyles} tokens={stackTokens}>
-          <Text
-            styles={{
-              root: {
-                padding: "5px 0",
-                fontSize: FontSizes.mediumPlus,
-                fontWeight: FontWeights.bold,
-              },
-            }}
-            block
-          >
-            Explore Planetary Computer datasets
-          </Text>
+          <img alt='Digital Earth Pacific logo' src='/images/logo.png' />
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <CollectionSelector />
             <MosaicPresetSelector />
