@@ -10,12 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: borales/actions-yarn@v2.3.0
+      - uses: actions/setup-node@v2
         with:
-          cmd: install
-      - uses: borales/actions-yarn@v2.3.0
-        with:
-          cmd: build
+          node-version: '14.15.5'
+        - run: yarn install
+        - run: yarn build
       - uses: bacongobbler/azure-blob-storage-upload@v1.2.0
         with:
           source_dir: build
