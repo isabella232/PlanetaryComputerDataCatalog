@@ -13,6 +13,7 @@ import {
   useMapZoomToExtent,
   useCollectionBoundsLayer,
   useUrlState,
+  useSlider
 } from "./hooks";
 import { ZoomMessage, ExtentMessage } from "../controls/MapMessages";
 
@@ -26,9 +27,10 @@ import {
 import MapSettingsControl from "./components/MapSettingsControl";
 import { DEFAULT_MAP_STYLE } from "pages/Explore/utils/constants";
 import LegendControl from "./components/LegendControl";
-import CompareMap from './components/CompareMap'
+
 
 const mapContainerId: string = "viewer-map";
+export const sliderMapContainerId: string = 'slider-map'
 
 const ExploreMap = () => {
   const mapRef = useRef<atlas.Map | null>(null);
@@ -76,6 +78,7 @@ const ExploreMap = () => {
   useMosaicLayer(mapRef, mapReady);
   useZoomEvents(mapRef);
   useMapControls(mapRef, mapReady);
+  useSlider(mapRef);
   useUrlState();
 
   const { zoomToLayer, showZoomMsg } = useMapZoomToLayer();
@@ -95,8 +98,8 @@ const ExploreMap = () => {
       <PlaceSearchControl mapRef={mapRef} />
       <MapSettingsControl mapRef={mapRef} />
       <LegendControl />
-      <div id={mapContainerId} style={{ width: "100%", height: "100%", visibility: (compareMode)? 'hidden': 'visible' }} />
-      <CompareMap />
+      <div id={mapContainerId} style={{ width: "100%", height: "100%"}} />
+      <div id={sliderMapContainerId} style={{ width: "100%", height: "100%", position: 'absolute', top: 0, left: 0, visibility: (compareMode)? 'visible': 'hidden' }} />
     </div>
   );
 };
