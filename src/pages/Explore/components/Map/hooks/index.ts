@@ -5,6 +5,7 @@ import useMapControls from "./useMapControls";
 import useMapEvents from "./useEventHandlers";
 import useUrlState from "./useUrlState";
 import useZoomEvents from "./useZoomEvents";
+import useSlider from './useSlider'
 import { useMapZoomToLayer, useMapZoomToExtent } from "./useLayerNotices";
 
 export {
@@ -16,5 +17,6 @@ export {
   useMapEvents,
   useZoomEvents,
   useMapZoomToLayer,
+  useSlider,
   useMapZoomToExtent,
 };

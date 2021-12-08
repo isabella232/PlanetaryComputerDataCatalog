@@ -15,7 +15,7 @@ const MapMessage: React.FC = ({ children }) => {
         top: 10,
         left: "50%",
         transform: "translate(-50%, 0)",
-        zIndex: 1,
+        zIndex: 200,
         padding: "7px 10px",
         borderRadius: 5,
         border: "1px solid",

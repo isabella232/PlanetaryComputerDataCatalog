@@ -67,6 +67,6 @@ const SearchResultsHeader = ({ results, isLoading }: SearchResultsHeaderProps) =
 
 export default SearchResultsHeader;
 
-const headerStyles = {
+export const headerStyles = {
   root: { fontSize: FontSizes.medium, fontWeight: FontWeights.bold },
 };

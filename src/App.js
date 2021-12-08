@@ -22,7 +22,7 @@ function App() {
     <Router basename={process.env.PUBLIC_URL}>
       <div>
         <Switch>
-          <Route exact path="/">
+          <Route path="/">
             <Suspense fallback={pageFallback}>
               <Explore />
             </Suspense>
