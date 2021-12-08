@@ -91,6 +91,11 @@ const useSlider = (
         sliderRef.current.dispose()
         sliderRef.current = null
       }
+      // clean map layer when compare mode toggles
+      if (sliderMapRef.current) {
+        const mosaicLayer = sliderMapRef.current.layers.getLayerById(sliderMosaicLayerName);
+        if (mosaicLayer) sliderMapRef.current.layers.remove(mosaicLayer)
+      }
       return;
     }
     // if slider map is not initiated yet, initiate it
@@ -110,12 +115,12 @@ const useSlider = (
         },
       });
       sliderMapRef.current = map2
-      const swipe = new SwipeMap(mapRef.current, map2);
-      sliderRef.current = swipe
-
       map2.events.add("ready", onReady);
     }
-
+    if (!sliderRef.current) {
+      const swipe = new SwipeMap(mapRef.current, sliderMapRef.current);
+      sliderRef.current = swipe
+    }
   }, [compareMode, center, zoom, mapRef])
 
 };
