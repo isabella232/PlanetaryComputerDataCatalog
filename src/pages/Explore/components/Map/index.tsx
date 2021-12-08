@@ -34,7 +34,8 @@ export const sliderMapContainerId: string = 'slider-map'
 
 const ExploreMap = () => {
   const mapRef = useRef<atlas.Map | null>(null);
-  const { center, zoom, compareMode} = useExploreSelector(s => s.map);
+  const { center, zoom} = useExploreSelector(s => s.map);
+  const { compareMode } = useExploreSelector(s => s.mosaic)
   const [mapReady, setMapReady] = useState<boolean>(false);
   const mapHandlers = useMapEvents(mapRef);
 

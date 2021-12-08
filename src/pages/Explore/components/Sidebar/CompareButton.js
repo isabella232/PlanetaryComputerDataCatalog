@@ -1,16 +1,18 @@
 import React from 'react'
-import {setCompareMode} from '../../state/mapSlice'
-import {resetQueryToCompare} from '../../state/mosaicSlice'
+import { setCompareMode, resetQueryToCompare } from '../../state/mosaicSlice'
 import { useExploreSelector, useExploreDispatch } from "../../state/hooks";
 
 const CompareButton = () => {
   const dispatch = useExploreDispatch();
-  const { compareMode } = useExploreSelector(s => s.map);
+  const { compareMode } = useExploreSelector(s => s.mosaic);
   function toggleCompare() {
     if (compareMode) {
       dispatch(resetQueryToCompare())
+      dispatch(setCompareMode(false))
+    } else {
+      dispatch(setCompareMode(true))
     }
-    dispatch(setCompareMode())
+    
   }
   return <button onClick={() => {toggleCompare()}} > Compare {compareMode? 'on': 'off'} </button>
 }

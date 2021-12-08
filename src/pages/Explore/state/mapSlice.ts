@@ -70,9 +70,6 @@ export const mapSlice = createSlice({
     },
     setUseHighDef: (state, action: PayloadAction<boolean>) => {
       state.useHighDef = action.payload;
-    },
-    setCompareMode: state => {
-      state.compareMode = !state.compareMode
     }
   },
   extraReducers: builder => {
@@ -99,8 +96,7 @@ export const {
   setShowCollectionOutline,
   setUseHighDef,
   clearBoundaryShape,
-  toggleShowSidebar,
-  setCompareMode
+  toggleShowSidebar
 } = mapSlice.actions;
 
 export default mapSlice.reducer;

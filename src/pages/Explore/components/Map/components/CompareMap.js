@@ -21,9 +21,9 @@ const CompareMap = () => {
   const map1Ref = useRef(null)
   const map2Ref = useRef(null)
   const [mapReady, setMapReady] = useState(false)
-  const { center, zoom, compareMode} = useExploreSelector(s => s.map);
   const { mosaic, detail, map } = useExploreSelector(s => s);
-  const { collection, query, queryToCompare, renderOption } = mosaic;
+  const { center, zoom } = map
+  const { collection, query, queryToCompare, renderOption, compareMode } = mosaic;
   const stacItemForMosaic = detail.showAsLayer ? detail.selectedItem : null;
   const { useHighDef } = map;
   const mapHandlers = useMapEvents(map1Ref);

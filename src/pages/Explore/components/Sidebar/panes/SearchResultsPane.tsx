@@ -26,8 +26,7 @@ interface SearchResultsProps {
 const SearchResultsPane = ({
   request: { data, isError, isLoading, isPreviousData },
 }: SearchResultsProps) => {
-  const { collection, mosaicOption } = useExploreSelector(s => s.mosaic);
-  const { compareMode } = useExploreSelector(s => s.map);
+  const { collection, mosaicOption, compareMode } = useExploreSelector(s => s.mosaic);
   const [scrollPos, setScrollPos] = useState(0);
   const listRef: React.RefObject<IList> = useRef(null);
   const lastColRef = useRef<IStacCollection | null>();

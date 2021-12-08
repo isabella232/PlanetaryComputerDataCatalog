@@ -10,6 +10,7 @@ export interface MosaicState {
   collection: IStacCollection | null;
   query: IMosaic;
   queryToCompare: IMosaic;
+  compareMode: boolean;
   renderOption: IMosaicRenderOption | null;
   mosaicOption: Array<any>;
   layer: {
@@ -36,6 +37,7 @@ const initialState: MosaicState = {
   collection: null,
   query: initialMosaicState,
   queryToCompare: initialMosaicState,
+  compareMode: false,
   renderOption: null,
   mosaicOption: [],
   layer: {
@@ -83,6 +85,8 @@ export const mosaicSlice = createSlice({
     setCollection: (state, action: PayloadAction<IStacCollection | null>) => {
       state.collection = action.payload;
       state.query = initialMosaicState;
+      state.queryToCompare = initialMosaicState;
+      state.compareMode = false;
       state.renderOption = null;
     },
     setQuery: (state, action: PayloadAction<IMosaic>) => {
@@ -90,6 +94,9 @@ export const mosaicSlice = createSlice({
     },
     setQueryToCompare: (state, action: PayloadAction<IMosaic>) => {
       state.queryToCompare = { ...action.payload, hash: null };
+    },
+    setCompareMode: (state, action:PayloadAction<boolean>) => {
+      state.compareMode = action.payload
     },
     setMosaicOption: (state, action: PayloadAction<any>) => {
       state.mosaicOption = action.payload
@@ -141,6 +148,7 @@ export const {
   setShowEdit,
   setShowResults,
   setLayerMinZoom,
+  setCompareMode,
   resetQueryToCompare
 } = mosaicSlice.actions;
 

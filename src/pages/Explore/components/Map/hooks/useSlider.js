@@ -26,12 +26,11 @@ const useSlider = (
   const sliderRef = useRef(null)
   const [sliderMapReady, setSliderMapReady] = useState(false)
 
-
-  const {width, height} = useWindowSize()
-  const { collection, query, queryToCompare, renderOption } = mosaic;
+  const { width, height } = useWindowSize()
+  const { collection, query, queryToCompare, renderOption, compareMode } = mosaic;
 
   const stacItemForMosaic = detail.showAsLayer ? detail.selectedItem : null;
-  const { useHighDef, center, zoom, compareMode, showSidebar } = map;
+  const { useHighDef, center, zoom, showSidebar } = map;
 
   // resize map as window size changes
   useEffect(() => {
@@ -70,7 +69,6 @@ const useSlider = (
         (mosaicLayer).setOptions(tileLayerOpts);
       } else {
         const layer = new atlas.layer.TileLayer(tileLayerOpts, sliderMosaicLayerName);
-        console.log('hellow are you added')
         map.layers.add(layer, itemOutlineLayerName);
       }
     } else {
