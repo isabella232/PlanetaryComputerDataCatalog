@@ -233,9 +233,9 @@ export class SwipeMap extends azmaps.internal.EventEmitter<SwipeMapEvents> {
         if (primaryMap && secondaryMap) {
             const mcl = primaryMap.getMapContainer().classList;
             if(mcl.contains("high-contrast-dark")){
-                self._hclStyle = <azmaps.ControlStyle>'dark';
+                self._hclStyle = 'dark' as azmaps.ControlStyle;
             }  else if (mcl.contains("high-contrast-light")){
-                self._hclStyle = <azmaps.ControlStyle>'light';
+                self._hclStyle = 'light' as azmaps.ControlStyle;
             }
 
             const css = self._css;
@@ -434,18 +434,18 @@ export class SwipeMap extends azmaps.internal.EventEmitter<SwipeMapEvents> {
             let x = 0;
 
             if (self._options.orientation === 'vertical') {
-                if ((<TouchEvent>e).touches) {
-                    x = (<TouchEvent>e).touches[0].clientX;
+                if ((e as TouchEvent).touches) {
+                    x = (e as TouchEvent).touches[0].clientX;
                 } else {
-                    x = (<MouseEvent>e).clientX;
+                    x = (e as MouseEvent).clientX;
                 }
 
                 x -= self._rightMapClientRect.left;
             } else {
-                if ((<TouchEvent>e).touches) {
-                    x = (<TouchEvent>e).touches[0].clientY;
+                if ((e as TouchEvent).touches) {
+                    x = (e as TouchEvent).touches[0].clientY;
                 } else {
-                    x = (<MouseEvent>e).clientY;
+                    x = (e as MouseEvent).clientY;
                 }
 
                 x -= self._rightMapClientRect.top;
