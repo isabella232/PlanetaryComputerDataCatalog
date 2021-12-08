@@ -86,7 +86,7 @@ const SearchResultsPane = ({
   return (
     <>
       <Separator />
-      {mosaicOption.length > 1 && <CompareButton />}
+      {mosaicOption.length > 1 && <><CompareButton />       <Separator /></>}
       {!compareMode && 
             <>
         <SearchResultsHeader results={data} isLoading={isPreviousData} />

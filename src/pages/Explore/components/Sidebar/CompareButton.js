@@ -1,10 +1,11 @@
 import React from 'react'
+import { Toggle } from '@fluentui/react/lib/Toggle';
 import { setCompareMode, resetQueryToCompare } from '../../state/mosaicSlice'
 import { useExploreSelector, useExploreDispatch } from "../../state/hooks";
-
+import { headerStyles } from './panes/SearchResultsHeader'
 const CompareButton = () => {
   const dispatch = useExploreDispatch();
-  const { compareMode } = useExploreSelector(s => s.mosaic);
+  const { compareMode, collection } = useExploreSelector(s => s.mosaic);
   function toggleCompare() {
     if (compareMode) {
       dispatch(resetQueryToCompare())
@@ -14,7 +15,9 @@ const CompareButton = () => {
     }
     
   }
-  return <button onClick={() => {toggleCompare()}} > Compare {compareMode? 'on': 'off'} </button>
+  return ( 
+      <Toggle label={<h4 style={headerStyles}>Compare different queries side by side from ${collection.title}</h4>} onText="On" offText="Off" onChange={toggleCompare} />
+    )
 }
 
 export default CompareButton
