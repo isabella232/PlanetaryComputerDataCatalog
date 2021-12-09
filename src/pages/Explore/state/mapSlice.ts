@@ -5,7 +5,8 @@ import { getCenterAndZoomQueryString } from "../utils";
 import { setShowAsLayer } from "./detailSlice";
 
 const { center, zoom } = getCenterAndZoomQueryString();
-
+// manually setting bbox for pacific islands
+const defaultBbox = [ 139.70214843749997, -29.08001067499991, 180.263671875, 20.555405992000132 ]
 export interface MapState {
   center: [number, number];
   zoom: number;
@@ -22,7 +23,7 @@ export interface MapState {
 const initialState: MapState = {
   center: center || [30, 30],
   zoom: zoom || 2,
-  bounds: null,
+  bounds: defaultBbox,
   boundaryShape: null,
   showCollectionOutline: true,
   showSidebar: true,
