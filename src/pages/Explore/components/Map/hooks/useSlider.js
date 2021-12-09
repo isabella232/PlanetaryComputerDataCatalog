@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useWindowSize } from "react-use";
 import * as atlas from "azure-maps-control";
 
@@ -25,12 +25,22 @@ const useSlider = (
   const sliderMapRef = useRef(null);
   const sliderRef = useRef(null)
   const [sliderMapReady, setSliderMapReady] = useState(false)
+  const [areTilesToCompareLoading, setTilesToCompareLoading] = useState(false);
 
   const { width, height } = useWindowSize()
   const { collection, query, queryToCompare, renderOption, compareMode } = mosaic;
 
   const stacItemForMosaic = detail.showAsLayer ? detail.selectedItem : null;
   const { useHighDef, center, zoom, showSidebar } = map;
+
+  const onDataEvent = useCallback((e) => {
+    const { map, isSourceLoaded, source, tile } = e;
+    if (map.areTilesLoaded() && isSourceLoaded && source === undefined && tile) {
+      setTilesToCompareLoading(false);
+    } else if (!map.areTilesLoaded() && source === undefined && tile) {
+      setTilesToCompareLoading(true);
+    }
+  }, []);
 
   // resize map as window size changes
   useEffect(() => {
@@ -116,12 +126,16 @@ const useSlider = (
       });
       sliderMapRef.current = map2
       map2.events.add("ready", onReady);
+      map2.events.add("data", onDataEvent);
     }
     if (!sliderRef.current) {
       const swipe = new SwipeMap(mapRef.current, sliderMapRef.current);
       sliderRef.current = swipe
     }
-  }, [compareMode, center, zoom, mapRef])
+  }, [compareMode, center, zoom, mapRef, onDataEvent])
+
+
+  return { areTilesToCompareLoading };
 
 };
 

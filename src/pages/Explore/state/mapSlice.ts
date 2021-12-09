@@ -20,7 +20,7 @@ export interface MapState {
 }
 
 const initialState: MapState = {
-  center: center || [30, 30],
+  center: center || [-168.16047115799995, -14.520928643999966],
   zoom: zoom || 2,
   bounds: null,
   boundaryShape: null,

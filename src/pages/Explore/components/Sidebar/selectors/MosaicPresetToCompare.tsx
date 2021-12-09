@@ -5,7 +5,7 @@ import { setMosaicToCompareQuery } from "../../../state/mosaicSlice";
 import StateSelector from "./StateSelector";
 
 const MosaicPresetToCompareSelector = () => {
-  const { collection, queryToCompare, mosaicOption } = useExploreSelector(state => state.mosaic);
+  const { collection, queryToCompare, mosaicOption, compareMode } = useExploreSelector(state => state.mosaic);
   const mosaics = mosaicOption
 
   const mosaicOptions =
@@ -27,7 +27,7 @@ const MosaicPresetToCompareSelector = () => {
       options={mosaicOptions}
       selectedKey={queryToCompare.name}
       getStateValFn={getQueryPresetByName}
-      disabled={!collection?.id}
+      disabled={!compareMode}
       cyId="mosaic-selector"
     />
   );

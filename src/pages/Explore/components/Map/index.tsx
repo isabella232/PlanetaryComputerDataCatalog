@@ -15,7 +15,7 @@ import {
   useUrlState,
   useSlider
 } from "./hooks";
-import { ZoomMessage, ExtentMessage } from "../controls/MapMessages";
+import { ZoomMessage, ExtentMessage, MapMessage } from "../controls/MapMessages";
 
 import PlaceSearchControl from "./components/PlaceSearch";
 import {
@@ -35,10 +35,10 @@ export const sliderMapContainerId: string = 'slider-map'
 const ExploreMap = () => {
   const mapRef = useRef<atlas.Map | null>(null);
   const { center, zoom} = useExploreSelector(s => s.map);
-  const { compareMode } = useExploreSelector(s => s.mosaic)
+  const { compareMode, queryToCompare, query } = useExploreSelector(s => s.mosaic)
   const [mapReady, setMapReady] = useState<boolean>(false);
   const mapHandlers = useMapEvents(mapRef);
-
+  const slider = useSlider(mapRef);
   // Initialize the map
   useEffect(() => {
     const onReady = () => setMapReady(true);
@@ -79,7 +79,6 @@ const ExploreMap = () => {
   useMosaicLayer(mapRef, mapReady);
   useZoomEvents(mapRef);
   useMapControls(mapRef, mapReady);
-  useSlider(mapRef);
   useUrlState();
 
   const { zoomToLayer, showZoomMsg } = useMapZoomToLayer();
@@ -87,14 +86,16 @@ const ExploreMap = () => {
 
   const { showExtentMsg, zoomToExtent } = useMapZoomToExtent(mapRef);
   const extentMsg = <ExtentMessage onClick={zoomToExtent} />;
+  const compareMsg = <MapMessage><span>{query.name} / {queryToCompare.name? queryToCompare.name : 'Not selected'}</span></MapMessage>
   const loadingIndicator = (
     <ProgressIndicator barHeight={1} styles={progressIndicatorStyles} />
   );
 
   return (
     <div style={mapContainerStyle}>
-      {mapHandlers.areTilesLoading && loadingIndicator}
+      {(mapHandlers.areTilesLoading || slider.areTilesToCompareLoading) && loadingIndicator}
       {showZoomMsg && zoomMsg}
+      {!showZoomMsg && compareMode && compareMsg}
       {showExtentMsg && extentMsg}
       <PlaceSearchControl mapRef={mapRef} />
       <MapSettingsControl mapRef={mapRef} />

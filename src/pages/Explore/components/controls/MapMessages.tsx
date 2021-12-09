@@ -5,7 +5,7 @@ interface MessageProps {
   onClick: () => void;
 }
 
-const MapMessage: React.FC = ({ children }) => {
+export const MapMessage: React.FC = ({ children }) => {
   const theme = useTheme();
 
   return (
