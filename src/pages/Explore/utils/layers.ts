@@ -12,10 +12,27 @@ export const layerControl = new atlas.control.StyleControl({
   ],
 });
 
+
 export const stacItemDatasource = new atlas.source.DataSource();
 export const stacCollectionDatasource = new atlas.source.DataSource();
 
+export const pacificDatasource = new atlas.source.DataSource();
+
+export const pacificLayerName = 'pacific-islands-outline'
 export const collectionLineLayerName = "stac-collection-line";
+
+
+export const pacificPolygonLayer = new atlas.layer.LineLayer(
+  pacificDatasource,
+  pacificLayerName,
+  {
+    strokeOpacity: 0.2,
+    strokeColor: "#2b88d8",
+    strokeWidth: 2
+  }
+)
+
+
 export const collectionLineLayer = new atlas.layer.LineLayer(
   stacCollectionDatasource,
   collectionLineLayerName,
