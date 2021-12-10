@@ -1,7 +1,7 @@
 import axios from "axios";
 import { makeFilterBody } from "pages/Explore/utils/hooks/useStacFilter";
 import { collectionFilter } from "pages/Explore/utils/stac";
-import { useQuery } from "react-query";
+import { useQuery, useQueries } from "react-query";
 import { makeTileJsonUrl } from "utils";
 import { DATA_URL, STAC_URL } from "./constants";
 
@@ -11,10 +11,27 @@ export const usePrefetchContent = () => {
 };
 
 export const useCollections = () => {
-  return useQuery(["stac", STAC_URL], getCollections, {
+  const results = useQueries([{
+    queryKey: ["stac", STAC_URL], 
+    queryFn: getCollections, 
     refetchOnWindowFocus: false,
     refetchOnMount: false,
-  });
+  }, {
+    queryKey: ["data", '/'], 
+    queryFn: getDEPData, 
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+  }] );
+  if (results[0].isSuccess && results[1].isSuccess) {
+    return { isSuccess: results[0].isSuccess && results[1].isSuccess,
+      data: {collections: [...results[0].data.collections, results[1].data]}}
+  } else {
+    return {
+      isSuccess: false,
+      data: {collections: []}
+    }
+  }
+
 };
 
 export const useStaticMetadata = staticFileName => {
@@ -57,6 +74,13 @@ const getCollections = async ({ queryKey }) => {
   // eslint-disable-next-line
   const [_key, collectionsUrl] = queryKey;
   const resp = await axios.get(`${collectionsUrl}/collections`);
+  return resp.data;
+};
+
+const getDEPData = async ({ queryKey }) => {
+  // eslint-disable-next-line
+  const [_key, collectionsUrl] = queryKey;
+  const resp = await axios.get(`/data/dep-data.json`);
   return resp.data;
 };
 

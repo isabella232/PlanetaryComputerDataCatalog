@@ -11,6 +11,8 @@ export interface IMosaicInfo {
 export interface IMosaic {
   name: string | null;
   description: string | null;
+  dep?: bool | null;
+  tif?: string | null;
   cql: [] | null;
   sortby: [] | null;
   hash?: string | null;

@@ -173,6 +173,11 @@ export const makeTileJsonUrl = (
   const renderParams = encodeRenderOpts(renderOption?.options);
   const format = renderOption?.options.includes("format") ? "" : "&format=png";
 
+  // hard code tile url for dep data
+  if (query.dep) {
+    return `http://dep-pctitiler.westeurope.cloudapp.azure.com/cog/tiles/{z}/{x}/{y}.png?url=${query.tif}&bidx=1&bidx=2&bidx=3&nodata=0&unscale=false&resampling=nearest&max_size=1024&return_mask=true`
+  }
+
   // Rendering a single Item
   if (item && collection) {
     const forcePngRenderParams = renderParams.replace("jpg", "png");
