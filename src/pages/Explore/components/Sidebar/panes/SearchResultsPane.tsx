@@ -86,7 +86,12 @@ const SearchResultsPane = ({
   return (
     <>
       <Separator />
-      {mosaicOption.length > 1 && <><CompareButton />       <Separator /></>}
+      {mosaicOption.length > 1 && 
+        <>
+          <CompareButton /> 
+          <MosaicPresetToCompare /> 
+          <Separator />
+        </>}
       {!compareMode && 
             <>
         <SearchResultsHeader results={data} isLoading={isPreviousData} />
@@ -113,7 +118,6 @@ const SearchResultsPane = ({
         <ExploreInHub />
         </>
       }
-      {compareMode && <MosaicPresetToCompare />}
     </>
   );
 };
