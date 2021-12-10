@@ -11,7 +11,6 @@ export const usePrefetchContent = () => {
 };
 
 export const useCollections = () => {
-  // probabaly replace it with : https://react-query.tanstack.com/reference/useQueries
   return useQuery(["stac", STAC_URL], getCollections, {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
