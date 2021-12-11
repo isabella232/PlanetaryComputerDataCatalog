@@ -31,6 +31,14 @@
 
 ---
 collections:
+  sentinel-2-cloudless:
+    category: DEP data
+    headerImg: ./images/threedep-seamless-hero.png
+    tabs:
+      - title: Example Notebook
+        src: 3dep-seamless-example.html
+        launch: datasets/dep/3dep-seamless-example.ipynb
+
   3dep-seamless:
     category: DEMs
     headerImg: ./images/threedep-seamless-hero.png
