@@ -1,0 +1,236 @@
+{
+  "id": "sentinel-2-cloudless",
+  "type": "Collection",
+  "links": [],
+  "title": "Sentinel 2 Cloudless (Monthly)",
+  "assets": { },
+  "extent": {
+      "spatial": {
+          "bbox": [
+            [ 139.70214843749997, -29.08001067499991, 180.263671875, 20.555405992000132 ]
+          ]
+      },
+      "temporal": {
+          "interval": [
+              [
+                  "2020-09-01T12:00:00.000000Z",
+                  "2020-12-01T12:00:00.000000Z"
+              ]
+          ]
+      }
+  },
+  "license": "proprietary",
+  "keywords": [
+      "dep"
+  ],
+  "providers": [
+      {
+          "url": "https://www.spc.int/DigitalEarthPacific",
+          "name": "DEP",
+          "roles": [
+              "producer",
+              "licensor"
+          ]
+      }],
+  "summaries": {
+      "gsd": [
+          15,
+          30,
+          90
+      ],
+      "eo:bands": [
+      ],
+      "platform": [
+          "terra"
+      ],
+      "instruments": [
+          "aster"
+      ]
+  },
+  "description": "DEP data",
+  "item_assets": {
+      "TIR": {
+          "roles": [
+              "data"
+          ],
+          "title": "TIR Swath data",
+          "eo:bands": [
+              {
+                  "gsd": 90,
+                  "name": "TIR_Band10",
+                  "common_name": "lwir",
+                  "description": "thermal infrared",
+                  "center_wavelength": 8.3,
+                  "full_width_half_max": 0.35
+              },
+              {
+                  "gsd": 90,
+                  "name": "TIR_Band11",
+                  "common_name": "lwir",
+                  "description": "thermal infrared",
+                  "center_wavelength": 8.65,
+                  "full_width_half_max": 0.35
+              },
+              {
+                  "gsd": 90,
+                  "name": "TIR_Band12",
+                  "common_name": "lwir",
+                  "description": "thermal infrared",
+                  "center_wavelength": 9.11,
+                  "full_width_half_max": 0.35
+              },
+              {
+                  "gsd": 90,
+                  "name": "TIR_Band13",
+                  "common_name": "lwir",
+                  "description": "thermal infrared",
+                  "center_wavelength": 10.6,
+                  "full_width_half_max": 0.7
+              },
+              {
+                  "gsd": 90,
+                  "name": "TIR_Band14",
+                  "common_name": "lwir",
+                  "description": "thermal infrared",
+                  "center_wavelength": 11.3,
+                  "full_width_half_max": 0.7
+              }
+          ]
+      },
+      "xml": {
+          "type": "application/xml",
+          "roles": [
+              "metadata"
+          ],
+          "title": "XML metadata"
+      },
+      "SWIR": {
+          "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "roles": [
+              "data"
+          ],
+          "title": "SWIR Swath data",
+          "eo:bands": [
+              {
+                  "gsd": 30,
+                  "name": "SWIR_Band4",
+                  "common_name": "swir",
+                  "description": "short-wave infrared",
+                  "center_wavelength": 1.65,
+                  "full_width_half_max": 0.1
+              },
+              {
+                  "gsd": 30,
+                  "name": "SWIR_Band5",
+                  "common_name": "swir",
+                  "description": "short-wave infrared",
+                  "center_wavelength": 2.165,
+                  "full_width_half_max": 0.04
+              },
+              {
+                  "gsd": 30,
+                  "name": "SWIR_Band6",
+                  "common_name": "swir",
+                  "description": "short-wave infrared",
+                  "center_wavelength": 2.205,
+                  "full_width_half_max": 0.04
+              },
+              {
+                  "gsd": 30,
+                  "name": "SWIR_Band7",
+                  "common_name": "swir",
+                  "description": "short-wave infrared",
+                  "center_wavelength": 2.26,
+                  "full_width_half_max": 0.05
+              },
+              {
+                  "gsd": 30,
+                  "name": "SWIR_Band8",
+                  "common_name": "swir",
+                  "description": "short-wave infrared",
+                  "center_wavelength": 2.339,
+                  "full_width_half_max": 0.07
+              },
+              {
+                  "gsd": 30,
+                  "name": "SWIR_Band9",
+                  "common_name": "swir",
+                  "description": "short-wave infrared",
+                  "center_wavelength": 2.395,
+                  "full_width_half_max": 0.07
+              }
+          ]
+      },
+      "VNIR": {
+          "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "roles": [
+              "data"
+          ],
+          "title": "VNIR Swath data",
+          "eo:bands": [
+              {
+                  "gsd": 15,
+                  "name": "VNIR_Band1",
+                  "common_name": "yellow/green",
+                  "description": "visible yellow/green",
+                  "center_wavelength": 0.56,
+                  "full_width_half_max": 0.08
+              },
+              {
+                  "gsd": 15,
+                  "name": "VNIR_Band2",
+                  "common_name": "red",
+                  "description": "visible red",
+                  "center_wavelength": 0.66,
+                  "full_width_half_max": 0.06
+              },
+              {
+                  "gsd": 15,
+                  "name": "VNIR_Band3N",
+                  "common_name": "near infrared",
+                  "description": "near infrared",
+                  "center_wavelength": 0.82,
+                  "full_width_half_max": 0.08
+              }
+          ]
+      },
+      "qa-txt": {
+          "type": "text/plain",
+          "roles": [
+              "metadata"
+          ],
+          "title": "QA browse file",
+          "description": "Geometric quality assessment report."
+      },
+      "qa-browse": {
+          "type": "image/jpeg",
+          "roles": [
+              "thumbnail"
+          ],
+          "title": "QA browse file",
+          "description": "Single-band black and white reduced resolution browse overlaid with red, green, and blue (RGB) markers for GCPs used during the geometric verification quality check."
+      },
+      "tir-browse": {
+          "type": "image/jpeg",
+          "roles": [
+              "thumbnail"
+          ],
+          "title": "Standalone reduced resolution TIR"
+      },
+      "vnir-browse": {
+          "type": "image/jpeg",
+          "roles": [
+              "thumbnail"
+          ],
+          "title": "VNIR browse file",
+          "description": "Standalone reduced resolution VNIR"
+      }
+  },
+  "stac_version": "1.0.0",
+  "msft:container": "aster",
+  "stac_extensions": [
+      "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json"
+  ],
+  "msft:storage_account": "astersa",
+  "msft:short_description": "DEP data"
+}

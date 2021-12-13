@@ -57,8 +57,15 @@ const getCollections = async ({ queryKey }) => {
   // eslint-disable-next-line
   const [_key, collectionsUrl] = queryKey;
   const resp = await axios.get(`${collectionsUrl}/collections`);
-  return resp.data;
+  // sneak in dep data
+  const depResp = await axios.get(`/data/dep-data.json`);
+  const mergedData = {
+    ...resp.data,
+    collections: [...resp.data.collections, depResp.data]
+  }
+  return mergedData;
 };
+
 
 const getStaticMetadata = async ({ queryKey }) => {
   const [file] = queryKey;
