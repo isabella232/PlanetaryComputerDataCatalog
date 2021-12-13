@@ -13,11 +13,12 @@ import { isValidExplorer } from "utils/collections";
 
 const CollectionSelector = () => {
   const { isSuccess, data } = useCollections();
-  const collections: IStacCollection[] = data?.collections!;
-  const collection = useExploreSelector(state => state.mosaic.collection)
+  const collections: IStacCollection[] = data?.collections;
+  const collection = useExploreSelector(state => state.mosaic.collection);
+
   // Sets selector values based off of url state
   useCollectionUrlState(collections);
-  
+
   const collectionOptions = isSuccess ? sortedOptions(collections) : [];
 
   const getCollectionById = (key: string | number) => {
