@@ -43,12 +43,7 @@
   "extent": {
       "spatial": {
           "bbox": [
-              [
-                  -180,
-                  -90,
-                  180,
-                  90
-              ]
+            [ 139.70214843749997, -29.08001067499991, 180.263671875, 20.555405992000132 ]
           ]
       },
       "temporal": {
@@ -401,5 +396,5 @@
       "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json"
   ],
   "msft:storage_account": "astersa",
-  "msft:short_description": "The ASTER instrument, launched on-board NASA's Terra satellite in 1999, provides multispectral images of the Earth at 15m-90m resolution.  This dataset contains ASTER data from 2000-2006."
+  "msft:short_description": "DEP data"
 }

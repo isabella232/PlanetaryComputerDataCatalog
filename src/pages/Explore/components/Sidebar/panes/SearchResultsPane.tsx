@@ -64,7 +64,8 @@ const SearchResultsPane = ({
       <Spinner />
     </>
   );
-
+  // Hide hub button if selected collection is dep data (Sentinel 2 cloudless)
+  const hubButton = (collection?.id === 'sentinel-2-cloudless')? (<></>) : (<ExploreInHub />)
   // The logic here is complex.
   // If the collection has changed, and the new collection exists, and the query is returning previous results,
   // don't render the previous results while the new ones are fetched. Show a loading indicator.
@@ -110,7 +111,7 @@ const SearchResultsPane = ({
             />
           </FocusZone>
         </div>
-        <ExploreInHub />
+        {hubButton}
         </>
       }
       {compareMode && <MosaicPresetToCompare />}
