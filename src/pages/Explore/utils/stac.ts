@@ -44,8 +44,8 @@ export const getAlternativeNameForMosaic =  function (mosaic: any) {
     }).filter((e:any) => e)
     const month = dateTime.map((dateElements: any) => {
       const eachMonth = dateElements.map((dateString:string) => {
-        const yyyymmdd = dateString.split('-')
-        const date = new Date(parseInt(yyyymmdd[0]), parseInt(yyyymmdd[1]) - 1, parseInt(yyyymmdd[2]));
+        const yyyymmdd = dateString.split('-').map((e:string) => parseInt(e))
+        const date = new Date(yyyymmdd[0], yyyymmdd[1] - 1, yyyymmdd[2]);
         const monthName = date.toLocaleString('default', { month: 'short' });
         return monthName
       })
