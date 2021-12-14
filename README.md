@@ -1,6 +1,9 @@
 # Digital Earth Pacific Data Viewer
 
-Digital Earth Pacific Data Viewer is built based upon [Microsoft's Planetary Computer Data Catalog](https://github.com/microsoft/PlanetaryComputerDataCatalog). Currently, (Dec 2021) DEP Data Viewer only uses [Explorer part](https://planetarycomputer.microsoft.com/explore) of Planetary Computer Data Catalog front-end app. 
+Digital Earth Pacific Data Viewer is built based upon [Microsoft's Planetary Computer Data Catalog](https://github.com/microsoft/PlanetaryComputerDataCatalog). Currently, (Dec 2021) DEP Data Viewer only uses [Explorer part](https://planetarycomputer.microsoft.com/explore) of Planetary Computer Data Catalog front-end app. This fork has a few customized features such as 
+
+- ability to compare the dataset from a different point of time side by side with [slider](https://docs.microsoft.com/en-us/samples/azure-samples/azure-maps-swipe-map/azure-maps-swipe-map-module/)
+- customization for Digital Earth Pacific (Showing Pacific islands area as area of interest, Adding DEP dataset to collection list)
 
 Major parts of the documentation below is also from Microsoft Planetary Computer Data Catalog repo. 
 ## Requirements
