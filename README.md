@@ -1,25 +1,8 @@
-# Planetary Computer Data Catalog
+# Digital Earth Pacific Data Viewer
 
-⚠️ Note: This repository serves as a reference implementation for interacting with
-Planetary Computer APIs on Azure. Ths code supports the production deployment of
-the Planetary Computer Data Catalog and Explorer applications. This repository
-is not meant to be reusable in other situations without significant
-modification, and the repository maintainers cannot provide any support for
-non-development deployments of this code. Additionally, this application is under
-constant development, including some significant planned refactors.
+Digital Earth Pacific Data Viewer is built based upon [Microsoft's Planetary Computer Data Catalog](https://github.com/microsoft/PlanetaryComputerDataCatalog). Currently, (Dec 2021) DEP Data Viewer only uses [Explorer part](https://planetarycomputer.microsoft.com/explore) of Planetary Computer Data Catalog front-end app. 
 
-That said, it is hoped that components or examples contained here will be
-helpful for users developing applications using the open-source components also
-used by the Planetary Computer, or against Planetary Computer APIs themselves.
-Please review the [terms of use](https://planetarycomputer.microsoft.com/terms).
-
-To file general issues or ask questions, please visit the [Planetary Computer
-repository](https://github.com/microsoft/PlanetaryComputer).
-
-## Data Catalog
-
-A homepage, data catalog, and visualizations for the Planetary Computer.
-
+Major parts of the documentation below is also from Microsoft Planetary Computer Data Catalog repo. 
 ## Requirements
 
 - Node v14.15 (LTS)
@@ -141,46 +124,7 @@ Both test suites are run from CI.
 
 ## Deploying
 
-There are 3 Azure Static Web App services enabled, for staging, test and
-production. They are configured via [the GitHub workflow
-files](.github/workflows). Generally, merging to deployment branches will
-initiate a build and deploy with the service framework:
-
-- `develop`: Deploys to staging and test (`pc-datacatalog`, `pc-datacatalog-test`)
-- `main`: Deploys to production (`pc-datacatalog-production`)
-
-Opening a PR against either branch will also create an ephemeral staging environment, and a site link will be added to the PR comment section.
-
-The release process can be managed with git flow, initialized with the default settings. To bring forth a production release, pull local `develop` and `main` to latest, and follow these steps:
-
-- Start a release
-
-```bash
-git flow release start X.Y.Z
-```
-
-- Bump the version number in `package.json` and check it in
-
-```bash
-git status # check staging area is clean
-git add package.json
-git commit -m "X.Y.Z"
-```
-
-- Publish the release
-
-```bash
-git flow release publish X.Y.Z
-```
-
-- Finish and push the release branch
-  - When prompted, keep default commit messages
-  - Use `X.Y.Z` as the tag message
-
-```bash
-git flow release finish -p X.Y.Z
-```
-
+Any change on `develop` branch will trigger [GitHub Action](https://github.com/developmentseed/PlanetaryComputerDataCatalog/blob/develop/.github/workflows/temporary_build.yaml) that deploys Data 
 ## Contributing
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a
