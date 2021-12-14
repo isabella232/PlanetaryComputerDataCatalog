@@ -1,5 +1,5 @@
 import { IDropdownOption } from "@fluentui/react";
-
+import { getAlternativeNameForMosaic } from "../../../utils/stac";
 import { useExploreSelector } from "../../../state/hooks";
 import { setMosaicToCompareQuery } from "../../../state/mosaicSlice";
 import StateSelector from "./StateSelector";
@@ -11,7 +11,7 @@ const MosaicPresetToCompareSelector = () => {
   const mosaicOptions =
     mosaics.length
       ? mosaics.map((mosaic): IDropdownOption => {
-          return { key: mosaic.name || "", text: mosaic.name || "" };
+          return { key: mosaic.name || "", text: getAlternativeNameForMosaic(mosaic) || "" };
         })
       : [];
 

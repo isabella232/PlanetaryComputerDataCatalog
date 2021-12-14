@@ -1,10 +1,12 @@
 import { IDropdownOption } from "@fluentui/react";
 import { useEffect } from "react";
 import { useCollectionMosaicInfo } from "../../../utils/hooks";
+import { getAlternativeNameForMosaic } from "../../../utils/stac";
 import { useExploreDispatch, useExploreSelector } from "../../../state/hooks";
 import { setMosaicQuery, setMosaicOption } from "../../../state/mosaicSlice";
 import StateSelector from "./StateSelector";
 import { useMosaicUrlState } from "./hooks/useUrlState";
+
 
 const MosaicPresetSelector = () => {
   const { collection, query } = useExploreSelector(state => state.mosaic);
@@ -24,7 +26,7 @@ const MosaicPresetSelector = () => {
   const mosaicOptions =
     isSuccess && mosaicInfo?.mosaics
       ? mosaicInfo.mosaics.map((mosaic): IDropdownOption => {
-          return { key: mosaic.name || "", text: mosaic.name || "" };
+          return { key: mosaic.name || "", text: getAlternativeNameForMosaic(mosaic) || "" };
         })
       : [];
 
