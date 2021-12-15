@@ -127,7 +127,7 @@ Both test suites are run from CI.
 
 ## Deploying
 
-Any change on `develop` branch will trigger [GitHub Action](https://github.com/developmentseed/PlanetaryComputerDataCatalog/blob/develop/.github/workflows/temporary_build.yaml) that deploys Data 
+Any change on `develop` branch will trigger [GitHub Action](https://github.com/developmentseed/PlanetaryComputerDataCatalog/blob/develop/.github/workflows/temporary_build.yaml) that deploys Data Viewer.
 ## Contributing
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a
