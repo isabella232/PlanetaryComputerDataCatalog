@@ -42,6 +42,8 @@ const CollectionSelector = () => {
 
 export default CollectionSelector;
 
+const depDataCategoryName = 'Digital Earth Pacific'
+
 const sortedOptions = (collections: IStacCollection[]) => {
   const renderable = collections.filter(isValidExplorer).map(c => ({
     text: c.title,
@@ -50,11 +52,14 @@ const sortedOptions = (collections: IStacCollection[]) => {
   }));
   const catCollections = sortBy(renderable, "text");
   const sortedCollections = sortBy(catCollections, "category");
+
+  // put DEP data on the top
+  const depPrioritizedCollections = [...sortedCollections.filter(e => e.category === depDataCategoryName), ...sortedCollections.filter( e => e.category !== depDataCategoryName)]
   const options: IDropdownOption[] = [];
 
   // Group by category, defined in the dataset config
   let lastCategory = "";
-  sortedCollections.forEach(({ key, text, category }) => {
+  depPrioritizedCollections.forEach(({ key, text, category }) => {
     // Add a category header if the category has changed
     if (lastCategory !== category) {
       options.push({
