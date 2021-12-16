@@ -32,7 +32,7 @@
 ---
 collections:
   sentinel-2-cloudless:
-    category: DEP data
+    category: Digital Earth Pacific
     headerImg: ./images/threedep-seamless-hero.png
     tabs:
       - title: Example Notebook
