@@ -25,7 +25,7 @@ Copy `/public/data/dep-data.json` and edit the attributes as needed. Put this ed
 }
 ```
 
-Make a directory in `/public/stac/${id}` named as id in the json and make `mosaicinfo.json` in that directory. So in this case, the directory will be named as `/public/stac/example-sentinel`. Copy one of mosaicjson from another folder (`public/stac/sentinel-2-cloudless/mosaicinfo.json` is a good chocie since it is already edited to support DEP data) and paste it into the directory you just made. (so it will be `/public/stac/example-sentinel/mosaicinfo.json`) Edit `mosaicinfo.json` as needed. (Read the section below if you need more information about each attribute in `mosaicinfo.json`).
+Make a directory in `/public/stac/${id}` named as id in the json and make `mosaicinfo.json` in that directory. So in this case, the directory will be named as `/public/stac/example-sentinel`. Copy one of mosaicjson from another folder (`public/stac/sentinel-2-cloudless/mosaicinfo.json` is a good chocie since it is already edited to support DEP data) and paste it into the directory you just made. (so it will be `/public/stac/example-sentinel/mosaicinfo.json`) Edit `mosaicinfo.json` as needed. (Read the section below if you need more information about each attribute in `mosaicinfo.json`). Add your dataset to collection list in `/src/config/datasets.yml` with a proper category name. ex.[Sentinel 2 Cloudless](https://github.com/developmentseed/PlanetaryComputerDataCatalog/blob/develop/src/config/datasets.yml#L34-L35)
 
 To see the new layer from Viewer, you need to add the code to fetch this new data. Edit [this part](https://github.com/developmentseed/PlanetaryComputerDataCatalog/blob/develop/src/utils/requests.js#L61-L66) of the code in `/src/utils/requests.js` like below.
 
