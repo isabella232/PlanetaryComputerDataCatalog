@@ -1,4 +1,4 @@
-## How to add DEP data layer
+## How to add custom data layer
 
 Copy `/public/data/dep-data.json` and edit the attributes as needed. Put this edited json in the same directory but with the different name. Let's say we named json file as `another-data.json`, and this json has attributes as below.
 
@@ -40,6 +40,6 @@ To see the new layer from Viewer, you need to add the code to fetch this new dat
 ```
 This should make the viewer to display your new data layer as one of collection options.
 
-## How to add more dates for the layer
+## How to add more dates for DEP data layer
 
 `/public/stac/sentinel-2-cloudless/mosaicinfo.json` is the [file](https://github.com/developmentseed/PlanetaryComputerDataCatalog/blob/develop/public/stac/sentinel-2-cloudless/mosaicInfo.json) that holds the information about Digital Earth Pacific's Sentinel 2 Cloudless data. If you want to add a different date for this dataset, copy one of already existing mosaic, edit the name(this name will show up in the dropdown), format(`cog` or `mosaicjson`), url (url where your cog, or mosaicjson is hosted) as needed and add as one of mosaics. Once this file edited and committed to `develop` branch, the change will show up to viewer automatically.
