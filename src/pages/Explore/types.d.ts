@@ -12,7 +12,8 @@ export interface IMosaic {
   name: string | null;
   description: string | null;
   dep?: bool | null;
-  mosaicjson?: string | null;
+  format?: string | null;
+  url?: string | null;
   cql: [] | null;
   sortby: [] | null;
   hash?: string | null;
