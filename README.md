@@ -6,6 +6,10 @@ Digital Earth Pacific Data Viewer is built based upon [Microsoft's Planetary Com
 - customization for Digital Earth Pacific (Showing Pacific islands area as area of interest, Adding DEP dataset to collection list)
 
 Major parts of the documentation below is also from Microsoft Planetary Computer Data Catalog repo. 
+
+## How to add custom Digital Earth Pacific data to viewer
+
+`/public/stac/sentinel-2-cloudless/mosaicinfo.json` is the [file](https://github.com/developmentseed/PlanetaryComputerDataCatalog/blob/develop/public/stac/sentinel-2-cloudless/mosaicInfo.json) that holds the information about Digital Earth Pacific data. If you want to add a layer, copy one of already existing mosaic, edit the name(this name will show up in the dropdown), format(`cog` or `mosaicjson`), url (url where your cog, or mosaicjson is hosted) as needed and add as one of mosaics. Once this file edited and committed to `develop` branch, the change will show up to viewer automatically.
 ## Requirements
 
 - Node v14.15 (LTS)
