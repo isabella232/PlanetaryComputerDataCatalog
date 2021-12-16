@@ -4,7 +4,8 @@
       "name": "2020 September",
       "description": "",
       "dep": true,
-      "mosaicjson": "https://deppcpublicstorage.blob.core.windows.net/output/demo/s2cloudless/sep2020-mosaic.json",
+      "format": "mosaicjson",
+      "url": "https://deppcpublicstorage.blob.core.windows.net/output/demo/s2cloudless/sep2020-mosaic.json",
       "cql": [
         { "lte": [{ "property": "datetime" }, "2020-09-01"] }
       ]
@@ -13,7 +14,8 @@
       "name": "2020 December",
       "description": "",
       "dep": true,
-      "mosaicjson": "https://deppcpublicstorage.blob.core.windows.net/output/demo/s2cloudless/dec2020-mosaic.json",
+      "format": "mosaicjson",
+      "url": "https://deppcpublicstorage.blob.core.windows.net/output/demo/s2cloudless/dec2020-mosaic.json",
       "cql": [
         { "lte": [{ "property": "datetime" }, "2020-12-01"] }
       ]
