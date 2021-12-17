@@ -33,11 +33,6 @@
 collections:
   sentinel-2-cloudless:
     category: Digital Earth Pacific
-    headerImg: ./images/threedep-seamless-hero.png
-    tabs:
-      - title: Example Notebook
-        src: 3dep-seamless-example.html
-        launch: datasets/dep/3dep-seamless-example.ipynb
 
   3dep-seamless:
     category: DEMs

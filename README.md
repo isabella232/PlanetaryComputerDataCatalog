@@ -6,6 +6,8 @@ Digital Earth Pacific Data Viewer is built based upon [Microsoft's Planetary Com
 - customization for Digital Earth Pacific (Showing Pacific islands area as area of interest, Adding DEP dataset to collection list)
 
 Major parts of the documentation below is also from Microsoft Planetary Computer Data Catalog repo. 
+
+Built by [@developmentseed](https://github.com/developmentseed/) team
 ## Requirements
 
 - Node v14.15 (LTS)
