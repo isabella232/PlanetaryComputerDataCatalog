@@ -7,7 +7,7 @@ Digital Earth Pacific Data Viewer is built based upon [Microsoft's Planetary Com
 
 Major parts of the documentation below is also from Microsoft Planetary Computer Data Catalog repo. 
 
-Built by @developmentseed team
+Built by [@developmentseed](https://github.com/developmentseed/) team
 ## Requirements
 
 - Node v14.15 (LTS)
