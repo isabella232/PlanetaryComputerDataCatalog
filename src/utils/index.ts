@@ -1,5 +1,7 @@
+ // @ts-nocheck 
 import * as dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import * as atlas from "azure-maps-control";
 
 import { IStacCollection, IStacItem } from "types/stac";
 import { DATA_URL, HUB_URL } from "./constants";
@@ -228,7 +230,8 @@ const dpSE = [177.9785, -17.8115]
 const dpNW = [144.8438, 13.5819]
 
 export const isPointInBbox = function (point: Array<number>, bb: Array<number>) {
-  return bb[0] <= point[0] &&  point[0] <= bb[2] && bb[1] <=  point[1] &&  point[1] <= bb[3]
+  const currentBbox = atlas.data.BoundingBox(bb)
+  return atlas.data.BoundingBox.containsPosition(currentBbox, point)
 }
 
 export const extentCoversDEP = function(bbox: Array<number>) {

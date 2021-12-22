@@ -28,9 +28,3 @@ test("case insensitive sort", () => {
   const un = ["z", "B", "a", "C"];
   expect(un.sort(isort)).toEqual(["a", "B", "C", "z"]);
 });
-
-test('returns proper boolean value for point in polygon', () => {
-  const point = [1, 1]
-  const bbox = [-180, -90, 180, 90]
-  expect(isPointInBbox(point, bbox)).toEqual(true)
-})
