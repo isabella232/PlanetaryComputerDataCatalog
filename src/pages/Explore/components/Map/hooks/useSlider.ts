@@ -1,39 +1,34 @@
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef, useCallback, RefObject } from "react";
 import { useWindowSize } from "react-use";
 import * as atlas from "azure-maps-control";
 
 import { makeTileJsonUrl } from "utils";
 import { useExploreSelector } from "pages/Explore/state/hooks";
-import SwipeMap from '../components/Slider'
+import SwipeMap from "../components/Slider";
 import { itemOutlineLayerName } from "pages/Explore/utils/layers";
 
-import {sliderMapContainerId} from '../'
+import { sliderMapContainerId } from "..";
 
 const SIDEBAR_DURATION = 350;
-const DARK_MAP_STYLE = 'grayscale_dark'
+const DARK_MAP_STYLE = "grayscale_dark";
 const sliderMosaicLayerName = "stac-mosaic-slider";
 
-const useSlider = (
-  mapRef
-) => {
-  const {
-    map,
-    detail,
-    mosaic
-  } = useExploreSelector(s => s);
-
-  const sliderMapRef = useRef(null);
-  const sliderRef = useRef(null)
-  const [sliderMapReady, setSliderMapReady] = useState(false)
+const useSlider = (mapRef: RefObject<atlas.Map | null>) => {
+  const { map, detail, mosaic } = useExploreSelector(s => s);
+  //TODO: You'll want to add the correct value that these two refs can take when they are not null
+  // like useRef<HTMLInputElement>(null) for example.
+  const sliderMapRef = useRef<any>(null);
+  const sliderRef = useRef<any>(null);
+  const [sliderMapReady, setSliderMapReady] = useState(false);
   const [areTilesToCompareLoading, setTilesToCompareLoading] = useState(false);
 
-  const { width, height } = useWindowSize()
+  const { width, height } = useWindowSize();
   const { collection, query, queryToCompare, renderOption, compareMode } = mosaic;
 
   const stacItemForMosaic = detail.showAsLayer ? detail.selectedItem : null;
   const { useHighDef, center, zoom, showSidebar } = map;
 
-  const onDataEvent = useCallback((e) => {
+  const onDataEvent = useCallback(e => {
     const { map, isSourceLoaded, source, tile } = e;
     if (map.areTilesLoaded() && isSourceLoaded && source === undefined && tile) {
       setTilesToCompareLoading(false);
@@ -51,21 +46,20 @@ const useSlider = (
 
   // resize map as sidebar toggles
   useEffect(() => {
-    if (!sliderMapRef.current) return;
     setTimeout(() => {
-      sliderMapRef.current.resize();
+      sliderMapRef.current?.resize();
     }, SIDEBAR_DURATION);
   }, [sliderMapRef, showSidebar]);
 
   useEffect(() => {
-    if (!mapRef.current || !queryToCompare.hash || !sliderMapReady) return
+    if (!mapRef.current || !queryToCompare.hash || !sliderMapReady) return;
     const map = sliderMapRef.current;
     const mosaicLayer = map.layers.getLayerById(sliderMosaicLayerName);
     const isItemLayerValid = stacItemForMosaic && collection;
     const isMosaicLayerValid = queryToCompare.hash;
 
     if ((isMosaicLayerValid || isItemLayerValid) && renderOption) {
-      const tileLayerOpts  = {
+      const tileLayerOpts = {
         tileUrl: makeTileJsonUrl(
           queryToCompare,
           renderOption,
@@ -76,35 +70,45 @@ const useSlider = (
         visible: true,
       };
       if (mosaicLayer) {
-        (mosaicLayer).setOptions(tileLayerOpts);
+        mosaicLayer.setOptions(tileLayerOpts);
       } else {
-        const layer = new atlas.layer.TileLayer(tileLayerOpts, sliderMosaicLayerName);
+        const layer = new atlas.layer.TileLayer(
+          tileLayerOpts,
+          sliderMosaicLayerName
+        );
         map.layers.add(layer, itemOutlineLayerName);
       }
     } else {
       if (mosaicLayer) {
         // Remove visibility of the mosaic layer, rather than remove it from the map. As a result,
         // the opacity settings will be retained
-        (mosaicLayer).setOptions({ visible: false });
+        mosaicLayer.setOptions({ visible: false });
       }
     }
-
-
-
-  }, [mapRef, sliderMapReady, queryToCompare, collection, query, renderOption, stacItemForMosaic,useHighDef])
+  }, [
+    mapRef,
+    sliderMapReady,
+    queryToCompare,
+    collection,
+    query,
+    renderOption,
+    stacItemForMosaic,
+    useHighDef,
+  ]);
   useEffect(() => {
     const onReady = () => setSliderMapReady(true);
 
     // if compare mode is off, discard slider
     if (!compareMode) {
       if (sliderRef.current) {
-        sliderRef.current.dispose()
-        sliderRef.current = null
+        sliderRef.current.dispose();
+        sliderRef.current = null;
       }
       // clean map layer when compare mode toggles
       if (sliderMapRef.current) {
-        const mosaicLayer = sliderMapRef.current.layers.getLayerById(sliderMosaicLayerName);
-        if (mosaicLayer) sliderMapRef.current.layers.remove(mosaicLayer)
+        const mosaicLayer =
+          sliderMapRef.current.layers.getLayerById(sliderMosaicLayerName);
+        if (mosaicLayer) sliderMapRef.current.layers.remove(mosaicLayer);
       }
       return;
     }
@@ -124,19 +128,17 @@ const useSlider = (
           subscriptionKey: process.env.REACT_APP_AZMAPS_KEY,
         },
       });
-      sliderMapRef.current = map2
+      sliderMapRef.current = map2;
       map2.events.add("ready", onReady);
       map2.events.add("data", onDataEvent);
     }
-    if (!sliderRef.current) {
+    if (!sliderRef.current && mapRef.current) {
       const swipe = new SwipeMap(mapRef.current, sliderMapRef.current);
-      sliderRef.current = swipe
+      sliderRef.current = swipe;
     }
-  }, [compareMode, center, zoom, mapRef, onDataEvent])
-
+  }, [compareMode, center, zoom, mapRef, onDataEvent]);
 
   return { areTilesToCompareLoading };
-
 };
 
 export default useSlider;
