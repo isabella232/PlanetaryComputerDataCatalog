@@ -16,7 +16,7 @@ jobs:
       - run: yarn install
       - run: yarn build
         env:
-          REACT_APP_API_ROOT: "https://planetarycomputer-staging.microsoft.com"
+          REACT_APP_API_ROOT: "https://planetarycomputer.microsoft.com"
           REACT_APP_AZMAPS_KEY: ${{ secrets.REACT_APP_AZMAPS_KEY }}
       - uses: bacongobbler/azure-blob-storage-upload@v1.2.0
         with:
