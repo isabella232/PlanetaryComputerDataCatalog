@@ -223,3 +223,10 @@ const encodeRenderOpts = (renderOpts: string | undefined) => {
 const removeMercatorAssets = (renderOpts: string) => {
   return renderOpts.replaceAll("_wm", "");
 };
+
+const dpSE = [177.9785, -17.8115]
+const dpNW = [144.8438, 13.5819]
+
+export const isPointInBbox = function (bb: Array<number>) {
+  return (bb[0] <= dpSE[0] &&  dpSE[0] <= bb[2] && bb[1] <=  dpSE[1] &&  dpSE[1] <= bb[3]) ||  (bb[0] <= dpNW[0] &&  dpNW[0] <= bb[2] && bb[1] <=  dpNW[1] &&  dpNW[1] <= bb[3])
+}
