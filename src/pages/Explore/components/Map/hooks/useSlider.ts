@@ -15,9 +15,7 @@ const sliderMosaicLayerName = "stac-mosaic-slider";
 
 const useSlider = (mapRef: RefObject<atlas.Map | null>) => {
   const { map, detail, mosaic } = useExploreSelector(s => s);
-  //TODO: You'll want to add the correct value that these two refs can take when they are not null
-  // like useRef<HTMLInputElement>(null) for example.
-  const sliderMapRef = useRef<any>(null);
+  const sliderMapRef = useRef<atlas.Map | null>(null);
   const sliderRef = useRef<any>(null);
   const [sliderMapReady, setSliderMapReady] = useState(false);
   const [areTilesToCompareLoading, setTilesToCompareLoading] = useState(false);
@@ -54,7 +52,7 @@ const useSlider = (mapRef: RefObject<atlas.Map | null>) => {
   useEffect(() => {
     if (!mapRef.current || !queryToCompare.hash || !sliderMapReady) return;
     const map = sliderMapRef.current;
-    const mosaicLayer = map.layers.getLayerById(sliderMosaicLayerName);
+    const mosaicLayer = map?.layers.getLayerById(sliderMosaicLayerName);
     const isItemLayerValid = stacItemForMosaic && collection;
     const isMosaicLayerValid = queryToCompare.hash;
 
@@ -70,19 +68,19 @@ const useSlider = (mapRef: RefObject<atlas.Map | null>) => {
         visible: true,
       };
       if (mosaicLayer) {
-        mosaicLayer.setOptions(tileLayerOpts);
+        (mosaicLayer as atlas.layer.TileLayer).setOptions(tileLayerOpts);
       } else {
         const layer = new atlas.layer.TileLayer(
           tileLayerOpts,
           sliderMosaicLayerName
         );
-        map.layers.add(layer, itemOutlineLayerName);
+        map?.layers.add(layer, itemOutlineLayerName);
       }
     } else {
       if (mosaicLayer) {
         // Remove visibility of the mosaic layer, rather than remove it from the map. As a result,
         // the opacity settings will be retained
-        mosaicLayer.setOptions({ visible: false });
+        (mosaicLayer as atlas.layer.TileLayer).setOptions({ visible: false });
       }
     }
   }, [
