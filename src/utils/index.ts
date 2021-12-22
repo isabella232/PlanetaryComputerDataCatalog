@@ -1,4 +1,3 @@
- // @ts-nocheck 
 import * as dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import * as atlas from "azure-maps-control";
@@ -230,7 +229,7 @@ const dpSE = [177.9785, -17.8115]
 const dpNW = [144.8438, 13.5819]
 
 export const isPointInBbox = function (point: Array<number>, bb: Array<number>) {
-  const currentBbox = atlas.data.BoundingBox(bb)
+  const currentBbox = new atlas.data.BoundingBox(bb)
   return atlas.data.BoundingBox.containsPosition(currentBbox, point)
 }
 
