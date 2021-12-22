@@ -4,7 +4,7 @@ import { collectionFilter } from "pages/Explore/utils/stac";
 import { useQuery } from "react-query";
 import { makeTileJsonUrl } from "utils";
 import { DATA_URL, STAC_URL } from "./constants";
-import { isPointInBbox  } from "utils";
+import { extentCoversDEP  } from "utils";
 
 // Query content can be prefetched if it's likely to be used
 export const usePrefetchContent = () => {
@@ -61,7 +61,8 @@ const getCollections = async ({ queryKey }) => {
 
   // filter out collection that doesn't have data near dep
   const collectionNearDP = resp.data.collections.filter(e => {
-    const anyBboxhasPoint = e.extent.spatial.bbox.filter(b => isPointInBbox(b) )
+    console.log(e.extent.spatial.bbox)
+    const anyBboxhasPoint = e.extent.spatial.bbox.filter(b => extentCoversDEP(b) )
     return !!anyBboxhasPoint.length
   })
   // sneak in dep data

@@ -1,4 +1,4 @@
-import { sortByPosition, capitalize, titleCase, isort } from "./index";
+import { sortByPosition, capitalize, titleCase, isort, isPointInBbox } from "./index";
 
 test("capitalizes a single word", () => {
   expect(capitalize("word")).toStrictEqual("Word");
@@ -28,3 +28,9 @@ test("case insensitive sort", () => {
   const un = ["z", "B", "a", "C"];
   expect(un.sort(isort)).toEqual(["a", "B", "C", "z"]);
 });
+
+test('returns proper boolean value for point in polygon', () => {
+  const point = [1, 1]
+  const bbox = [-180, -90, 180, 90]
+  expect(isPointInBbox(point, bbox)).toEqual(true)
+})
