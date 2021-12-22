@@ -60,16 +60,15 @@ const getCollections = async ({ queryKey }) => {
   const resp = await axios.get(`${collectionsUrl}/collections`);
 
   // filter out collection that doesn't have data near dep
-  const collectionNearDP = resp.data.collections.filter(e => {
-    console.log(e.extent.spatial.bbox)
-    const anyBboxhasPoint = e.extent.spatial.bbox.filter(b => extentCoversDEP(b) )
+  const collectionsNearDP = resp.data.collections.filter(e => {
+    const anyBboxhasPoint = e.extent.spatial.bbox.filter(b => extentCoversDEP(b))
     return !!anyBboxhasPoint.length
   })
   // sneak in dep data
   const depResp = await axios.get(`/data/dep-data.json`);
   const mergedData = {
     ...resp.data,
-    collections: [...collectionNearDP, depResp.data]
+    collections: [...collectionsNearDP, depResp.data]
   }
   return mergedData;
 };
