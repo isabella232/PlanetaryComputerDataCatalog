@@ -133,3 +133,16 @@ export const getUnhighlightItemFn = (map: atlas.Map) => {
     itemHoverLayer.setOptions({ filter: ["==", ["get", "stacId"], ""] });
   };
 };
+
+const dpSE = [177.9785, -17.8115]
+const dpNW = [144.8438, 13.5819]
+
+export const isPointInBbox = function (point: Array<number>, bb: Array<number>) {
+  const currentBbox = new atlas.data.BoundingBox(bb)
+  return atlas.data.BoundingBox.containsPosition(currentBbox, point)
+}
+
+export const extentCoversDEP = function(bbox: Array<number>) {
+  return isPointInBbox(dpSE, bbox) || isPointInBbox(dpNW, bbox)
+}
+

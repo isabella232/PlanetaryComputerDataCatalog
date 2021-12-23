@@ -4,7 +4,7 @@ import { collectionFilter } from "pages/Explore/utils/stac";
 import { useQuery } from "react-query";
 import { makeTileJsonUrl } from "utils";
 import { DATA_URL, STAC_URL } from "./constants";
-import { extentCoversDEP  } from "utils";
+import { extentCoversDEP  } from "../pages/Explore/utils/layers";
 
 // Query content can be prefetched if it's likely to be used
 export const usePrefetchContent = () => {

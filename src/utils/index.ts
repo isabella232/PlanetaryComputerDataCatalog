@@ -1,6 +1,5 @@
 import * as dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
-import * as atlas from "azure-maps-control";
 
 import { IStacCollection, IStacItem } from "types/stac";
 import { DATA_URL, HUB_URL } from "./constants";
@@ -224,16 +223,3 @@ const encodeRenderOpts = (renderOpts: string | undefined) => {
 const removeMercatorAssets = (renderOpts: string) => {
   return renderOpts.replaceAll("_wm", "");
 };
-
-const dpSE = [177.9785, -17.8115]
-const dpNW = [144.8438, 13.5819]
-
-export const isPointInBbox = function (point: Array<number>, bb: Array<number>) {
-  const currentBbox = new atlas.data.BoundingBox(bb)
-  return atlas.data.BoundingBox.containsPosition(currentBbox, point)
-}
-
-export const extentCoversDEP = function(bbox: Array<number>) {
-  return isPointInBbox(dpSE, bbox) || isPointInBbox(dpNW, bbox)
-}
-
