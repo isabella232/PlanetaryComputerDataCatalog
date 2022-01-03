@@ -1,4 +1,4 @@
-import { sortByPosition, capitalize, titleCase, isort, isPointInBbox } from "./index";
+import { sortByPosition, capitalize, titleCase, isort } from "./index";
 
 test("capitalizes a single word", () => {
   expect(capitalize("word")).toStrictEqual("Word");
