@@ -134,6 +134,8 @@ export const getUnhighlightItemFn = (map: atlas.Map) => {
   };
 };
 
+// South East/North West of Pacific island boundary
+// We are using these points to check if collection's extent covers Pacific island area
 const dpSE = [177.9785, -17.8115]
 const dpNW = [144.8438, 13.5819]
 
