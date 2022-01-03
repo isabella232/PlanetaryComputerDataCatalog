@@ -4,6 +4,7 @@ import { collectionFilter } from "pages/Explore/utils/stac";
 import { useQuery } from "react-query";
 import { makeTileJsonUrl } from "utils";
 import { DATA_URL, STAC_URL } from "./constants";
+import { extentCoversDEP  } from "../pages/Explore/utils/layers";
 
 // Query content can be prefetched if it's likely to be used
 export const usePrefetchContent = () => {
@@ -57,11 +58,17 @@ const getCollections = async ({ queryKey }) => {
   // eslint-disable-next-line
   const [_key, collectionsUrl] = queryKey;
   const resp = await axios.get(`${collectionsUrl}/collections`);
+
+  // filter out collection that doesn't have data near dep
+  const collectionsNearDP = resp.data.collections.filter(e => {
+    const anyBboxhasPoint = e.extent.spatial.bbox.filter(b => extentCoversDEP(b))
+    return !!anyBboxhasPoint.length
+  })
   // sneak in dep data
   const depResp = await axios.get(`/data/dep-data.json`);
   const mergedData = {
     ...resp.data,
-    collections: [...resp.data.collections, depResp.data]
+    collections: [...collectionsNearDP, depResp.data]
   }
   return mergedData;
 };
