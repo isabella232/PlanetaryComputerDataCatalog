@@ -78,7 +78,7 @@ const Sidebar = () => {
     <>
       <StackItem disableShrink styles={sidebarStyles}>
         <Stack styles={searchPanelStyles} tokens={stackTokens}>
-          <img alt='Digital Earth Pacific logo' src='/images/logo.png' />
+          <img style={{width: '100%', height: 'auto'}} alt='Digital Earth Pacific logo' src='/images/logo.png' />
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <CollectionSelector />
             <MosaicPresetSelector />
