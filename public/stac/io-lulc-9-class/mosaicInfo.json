@@ -5,8 +5,7 @@
       "description": "2019 Use/Land Cover",
       "cql": [
         {
-          "op": "=",
-          "args": [{ "property": "datetime" }, { "timestamp": "2019-06-01" }]
+          "eq": [{ "property": "datetime" }, "2019-06-01"]
         }
       ]
     },
@@ -15,8 +14,7 @@
       "description": "2018 Land Use/Land Cover",
       "cql": [
         {
-          "op": "=",
-          "args": [{ "property": "datetime" }, { "timestamp": "2018-06-01" }]
+          "eq": [{ "property": "datetime" }, "2018-06-01"]
         }
       ]
     },
@@ -25,8 +23,7 @@
       "description": "2017 Land Use/Land Cover",
       "cql": [
         {
-          "op": "=",
-          "args": [{ "property": "datetime" }, { "timestamp": "2017-06-01" }]
+          "eq": [{ "property": "datetime" }, "2017-06-01"]
         }
       ]
     }
