@@ -1,4 +1,4 @@
-{
+[{
   "id": "sentinel-2-cloudless",
   "type": "Collection",
   "links": [],
@@ -65,4 +65,4 @@
   ],
   "msft:storage_account": "astersa",
   "msft:short_description": "Digital Earth Pacific data"
-}
+}]
