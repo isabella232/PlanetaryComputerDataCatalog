@@ -68,7 +68,7 @@ const getCollections = async ({ queryKey }) => {
   const depResp = await axios.get(`/data/dep-data.json`);
   const mergedData = {
     ...resp.data,
-    collections: [...collectionsNearDP, depResp.data]
+    collections: [...collectionsNearDP, ...depResp.data]
   }
   return mergedData;
 };
