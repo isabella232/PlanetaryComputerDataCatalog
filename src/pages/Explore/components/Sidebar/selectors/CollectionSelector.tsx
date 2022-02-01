@@ -45,7 +45,9 @@ export default CollectionSelector;
 const depDataCategoryName = 'Digital Earth Pacific'
 
 const sortedOptions = (collections: IStacCollection[]) => {
-  const renderable = collections.filter(isValidExplorer).map(c => ({
+  const renderable = collections.filter(isValidExplorer)
+  .filter(c => collectionConfig[c.id]?.hide !== true)
+  .map(c => ({
     text: c.title,
     key: c.id,
     category: collectionConfig[c.id]?.category || "Other",
