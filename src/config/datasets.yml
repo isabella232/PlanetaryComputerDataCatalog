@@ -36,6 +36,7 @@ collections:
 
   3dep-seamless:
     category: DEMs
+    hide: true
     headerImg: ./images/threedep-seamless-hero.png
     tabs:
       - title: Example Notebook
@@ -68,6 +69,7 @@ collections:
 
   chloris-biomass:
     category: Biomass
+    hide: true
     headerImg: ./images/chloris-biomass-hero.jpg
     tabs:
       - title: Example Notebook
@@ -206,6 +208,7 @@ collections:
 
   goes-cmi:
     category: Imagery
+    hide: true
     headerImg: ./images/goes-cmi-hero.png
     tabs:
       - title: Example Notebook
