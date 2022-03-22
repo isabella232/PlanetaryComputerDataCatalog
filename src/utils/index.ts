@@ -175,7 +175,7 @@ export const makeTileJsonUrl = (
 
   // hard code tile url for dep data
   if (query.dep) {
-    return `https://dep-pctitiler.westeurope.cloudapp.azure.com/${query.format}/tiles/{z}/{x}/{y}.png?url=${query.url}&${renderParams}`
+    return `https://dep-pctitiler.westeurope.cloudapp.azure.com/${query.format}/tiles/{z}/{x}/{y}.png?url=${query.url}&${renderParams}${minZoom}${format}`
   }
 
   // Rendering a single Item
